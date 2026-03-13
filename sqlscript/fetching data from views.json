@@ -1,0 +1,17 @@
+{
+	"name": "fetching data from views",
+	"properties": {
+		"content": {
+			"query": "SELECT * from gold.sales",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "project db",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

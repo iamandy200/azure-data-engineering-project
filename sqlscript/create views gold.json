@@ -1,0 +1,17 @@
+{
+	"name": "create views gold",
+	"properties": {
+		"content": {
+			"query": "--create view calender\nCREATE VIEW gold.calendar\nAS\nSELECT * FROM\nOPENROWSET(\n    BULK 'https://projectstorageaccount200.blob.core.windows.net/silver/AdventureWorks_calendar/',\n    FORMAT= 'parquet'\n)as query1\n\n\n--create view product\nCREATE VIEW gold.product\nAS\nSELECT * FROM\nOPENROWSET(\n    BULK 'https://projectstorageaccount200.blob.core.windows.net/silver/AdventureWorks_Product/',\n    FORMAT= 'parquet'\n)as query1\n\n--create view subcategory\nCREATE VIEW gold.productSubCategory\nAS\nSELECT * FROM\nOPENROWSET(\n    BULK 'https://projectstorageaccount200.blob.core.windows.net/silver/AdventureWorks_ProductSubCategory/',\n    FORMAT= 'parquet'\n)as query1\n\n\n--create view returns\nCREATE VIEW gold.returns\nAS\nSELECT * FROM\nOPENROWSET(\n    BULK 'https://projectstorageaccount200.blob.core.windows.net/silver/AdventureWorks_Returns/',\n    FORMAT= 'parquet'\n)as query1\n\n\n--create view sales\nCREATE VIEW gold.sales\nAS\nSELECT * FROM\nOPENROWSET(\n    BULK 'https://projectstorageaccount200.blob.core.windows.net/silver/AdventureWorks_Sales/',\n    FORMAT= 'parquet'\n)as query1\n\n\n--create view territory\nCREATE VIEW gold.territory\nAS\nSELECT * FROM\nOPENROWSET(\n    BULK 'https://projectstorageaccount200.blob.core.windows.net/silver/AdventureWorks_Territory/',\n    FORMAT= 'parquet'\n)as query1\n\n\n--create view customers\nCREATE VIEW gold.customers\nAS\nSELECT * FROM\nOPENROWSET(\n    BULK 'https://projectstorageaccount200.blob.core.windows.net/silver/AdventureWorks_customers/',\n    FORMAT= 'parquet'\n)as query1\n\nSELECT * FROM gold.customers",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "project db",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

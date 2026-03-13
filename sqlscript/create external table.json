@@ -1,0 +1,17 @@
+{
+	"name": "create external table",
+	"properties": {
+		"content": {
+			"query": "CREATE DATABASE SCOPED CREDENTIAL cred_andy\nWITH\nIDENTITY = 'Managed Identity'\n\n\nCREATE EXTERNAL DATA SOURCE source_silver\nWITH\n(\n    LOCATION = 'https://projectstorageaccount200.blob.core.windows.net/silver',\n    CREDENTIAL = cred_andy\n)\n\n\n\nCREATE EXTERNAL DATA SOURCE source_gold\nWITH\n(\n    LOCATION = 'https://projectstorageaccount200.blob.core.windows.net/gold',\n    CREDENTIAL = cred_andy\n)\n\n\nCREATE EXTERNAL FILE FORMAT format_parquet\nWITH\n(\n    FORMAT_TYPE = PARQUET,\n    DATA_COMPRESSION = 'org.apache.hadoop.io.compress.SnappyCodec'\n)\n\n\n--externally stored in gold layer sales\n\nCREATE EXTERNAL TABLE gold.extsales\nWITH\n(\n    LOCATION='extsales',\n    DATA_SOURCE= source_gold,\n    FILE_FORMAT = format_parquet\n)AS\nSELECT * FROM gold.sales\n\n\n-- calendar\n\nCREATE EXTERNAL TABLE gold.ext_calendar\nWITH\n(\n    LOCATION='ext_calendar',\n    DATA_SOURCE= source_gold,\n    FILE_FORMAT = format_parquet\n)AS\nSELECT * FROM gold.calendar\n\nSELECT * from gold.ext_calendar\n\n\n\n--product\n\nCREATE EXTERNAL TABLE gold.ext_product\nWITH\n(\n    LOCATION='ext_product',\n    DATA_SOURCE= source_gold,\n    FILE_FORMAT = format_parquet\n)AS\nSELECT * FROM gold.product\n\n\n-- productSubCategory\nCREATE EXTERNAL TABLE gold.ext_pro_sub_cat\nWITH\n(\n    LOCATION='ext_pro_sub_cat',\n    DATA_SOURCE= source_gold,\n    FILE_FORMAT = format_parquet\n)AS\nSELECT * FROM gold.productSubCategory\n\n\n--returns\nCREATE EXTERNAL TABLE gold.ext_returns\nWITH\n(\n    LOCATION='ext_returns',\n    DATA_SOURCE= source_gold,\n    FILE_FORMAT = format_parquet\n)AS\nSELECT * FROM gold.returns\n\n\n--territory\nCREATE EXTERNAL TABLE gold.ext_territory\nWITH\n(\n    LOCATION='ext_territory',\n    DATA_SOURCE= source_gold,\n    FILE_FORMAT = format_parquet\n)AS\nSELECT * FROM gold.territory\n\n\n--customers\nCREATE EXTERNAL TABLE gold.ext_cust\nWITH\n(\n    LOCATION='ext_cust',\n    DATA_SOURCE= source_gold,\n    FILE_FORMAT = format_parquet\n)AS\nSELECT * FROM gold.customers",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "project db",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
